@@ -17,6 +17,7 @@ export const RestartButton = ({
     buttonRef.current?.blur()
     onRestart()
   }
+
   return (
     <button
       ref={buttonRef}
