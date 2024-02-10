@@ -1,6 +1,7 @@
 import { cn } from '@/util/class-names'
 import { ComponentProps } from 'react'
 import { motion } from 'framer-motion'
+import { formatPercentage } from '@/util/format-percentage'
 
 type Props = {
   errors: number
@@ -38,7 +39,7 @@ export const Results = ({
         animate={animate}
         transition={{ ...duration, delay: 0.5 }}
       >
-        Accuracy: {accuracyPercentage}
+        Accuracy: {formatPercentage(accuracyPercentage)}
       </motion.li>
       <motion.li
         className="text-red-500"
