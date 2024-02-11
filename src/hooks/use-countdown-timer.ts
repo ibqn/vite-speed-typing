@@ -10,9 +10,7 @@ export const useCountdownTimer = (duration: number) => {
   }
 
   const startCountDown = useCallback(() => {
-    if (intervalRef.current) {
-      clear()
-    }
+    clear()
 
     intervalRef.current = setInterval(() => {
       setTimeLeft((prev) => prev - 1)
