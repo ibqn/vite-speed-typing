@@ -5,7 +5,6 @@ import { Results } from '@/components/results'
 import { UserTypings } from '@/components/user-typings'
 import { WordsContainer } from '@/components/words-container'
 import { useEngine } from '@/hooks/use-engine'
-import { calculateAccuracyPercentage } from '@/util/calculate-accuracy-percentage'
 
 export const App = () => {
   const { state, words, timeLeft, typed, totalTyped, errors, restart } =
@@ -30,12 +29,7 @@ export const App = () => {
       />
 
       {state === 'finished' && (
-        <Results
-          className="mt-10"
-          errors={errors}
-          accuracyPercentage={calculateAccuracyPercentage(errors, totalTyped)}
-          totalWords={totalTyped}
-        />
+        <Results className="mt-10" errors={errors} totalWords={totalTyped} />
       )}
     </>
   )

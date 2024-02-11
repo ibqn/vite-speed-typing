@@ -1,23 +1,23 @@
 import { cn } from '@/util/class-names'
-import { ComponentProps } from 'react'
+import { ComponentProps, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { formatPercentage } from '@/util/format-percentage'
+import { calculateAccuracyPercentage } from '@/util/calculate-accuracy-percentage'
 
 type Props = {
   errors: number
-  accuracyPercentage: number
   totalWords: number
 } & ComponentProps<'ul'>
 
-export const Results = ({
-  className,
-  errors,
-  accuracyPercentage,
-  totalWords,
-}: Props) => {
+export const Results = ({ className, errors, totalWords }: Props) => {
   const initial = { opacity: 0 }
   const animate = { opacity: 1 }
   const duration = { duration: 0.3 }
+
+  const accuracyPercentage = useMemo(
+    () => calculateAccuracyPercentage(errors, totalWords),
+    [errors, totalWords]
+  )
 
   return (
     <motion.ul
