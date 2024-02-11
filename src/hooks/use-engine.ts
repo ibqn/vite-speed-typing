@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useWords } from '@/hooks/use-words'
 import { useCountdownTimer } from '@/hooks/use-countdown-timer'
+import { useTypings } from '@/hooks/use-typings'
 
 export type State = 'idle' | 'running' | 'finished'
 
@@ -12,6 +13,9 @@ export const useEngine = () => {
   const { words, updateWords } = useWords(NUMBER_OF_WORDS)
   const { timeLeft, startCountDown, resetCountDown } =
     useCountdownTimer(COUNTDOWN_SECONDS)
+  const { typed, cursor, clearTyped, resetTotalTyped } = useTypings(
+    state !== 'finished'
+  )
 
   const start = () => {
     setState('running')
@@ -30,5 +34,6 @@ export const useEngine = () => {
     timeLeft,
     startCountDown,
     resetCountDown,
+    typed,
   }
 }

@@ -7,7 +7,7 @@ import { WordsContainer } from '@/components/words-container'
 import { useEngine } from '@/hooks/use-engine'
 
 export const App = () => {
-  const { state, words, timeLeft } = useEngine()
+  const { state, words, timeLeft, typed } = useEngine()
 
   return (
     <>
@@ -15,7 +15,11 @@ export const App = () => {
 
       <WordsContainer>
         <GeneratedWords words={words} />
-        <UserTypings className="absolute inset-0" userInput={words} />
+        <UserTypings
+          className="absolute inset-0"
+          userInput={typed}
+          words={words}
+        />
       </WordsContainer>
 
       <RestartButton
