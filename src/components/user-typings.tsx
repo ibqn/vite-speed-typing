@@ -29,7 +29,7 @@ type CharacterProps = {
 
 const Character = ({ actual, expected }: CharacterProps) => {
   const isCorrect = useMemo(() => actual === expected, [actual, expected])
-  const isWhitespace = useMemo(() => actual === ' ', [actual])
+  const isWhitespace = useMemo(() => expected === ' ', [expected])
 
   return (
     <span
