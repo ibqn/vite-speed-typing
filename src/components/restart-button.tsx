@@ -20,6 +20,7 @@ export const RestartButton = ({
 
   return (
     <button
+      tabIndex={-1}
       ref={buttonRef}
       onClick={handleClick}
       {...otherProps}
