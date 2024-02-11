@@ -1,7 +1,7 @@
 import { cn } from '@/util/class-names'
 import { type ComponentProps } from 'react'
 
-type Props = {} & ComponentProps<'div'>
+type Props = ComponentProps<'div'>
 
 export const WordsContainer = (props: Props) => (
   <div
