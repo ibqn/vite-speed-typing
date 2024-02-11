@@ -18,11 +18,11 @@ export const useTypings = (enabled: boolean) => {
 
   const keydownHandler = useCallback(
     ({ key, code }: KeyboardEvent) => {
+      log('key', key, 'code', code)
+
       if (!enabled || !isKeyboardCodeAllowed(code)) {
         return
       }
-
-      log('key', key, 'code', code)
 
       if (code === 'Backspace') {
         setTyped((prev: string) => prev.slice(0, -1))
