@@ -14,7 +14,7 @@ export const App = () => {
     <>
       <CountdownTimer timeLeft={timeLeft} />
 
-      <WordsContainer>
+      <WordsContainer className="relative">
         <GeneratedWords words={words} />
         <UserTypings
           className="absolute inset-0"
