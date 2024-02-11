@@ -1,11 +1,9 @@
 import { motion } from 'framer-motion'
 
-type Props = {}
-
-export const Caret = (props: Props) => (
+export const Caret = () => (
   <motion.div
-    aria-hidden
-    className="bg-primary-500 inline-block h-7 w-0.5"
+    aria-hidden="true"
+    className="bg-primary-500 -mb-1 inline-block h-8 w-0.5"
     initial={{ opacity: 1 }}
     animate={{ opacity: 0 }}
     exit={{ opacity: 1 }}
