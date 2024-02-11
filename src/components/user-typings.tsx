@@ -1,4 +1,5 @@
 import { type ComponentProps, useMemo } from 'react'
+import { Caret } from '@/components/caret'
 
 type Props = {
   userInput: string
@@ -14,6 +15,7 @@ export const UserTypings = ({ userInput, ...props }: Props) => {
       {typedCharacters.map((character, index) => (
         <Character key={index} character={character} />
       ))}
+      <Caret />
     </div>
   )
 }
