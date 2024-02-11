@@ -4,9 +4,14 @@ export const useCountdownTimer = (duration: number) => {
   const [timeLeft, setTimeLeft] = useState(duration)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
 
+  const clear = () => {
+    intervalRef.current && clearInterval(intervalRef.current)
+    intervalRef.current = null
+  }
+
   const startCountDown = useCallback(() => {
     if (intervalRef.current) {
-      return
+      clear()
     }
 
     intervalRef.current = setInterval(() => {
@@ -14,15 +19,8 @@ export const useCountdownTimer = (duration: number) => {
     }, 1000)
   }, [setTimeLeft])
 
-  const clear = () => {
-    intervalRef.current && clearInterval(intervalRef.current)
-    intervalRef.current = null
-  }
-
   const resetCountDown = useCallback(() => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current)
-    }
+    clear()
     setTimeLeft(duration)
   }, [duration, setTimeLeft])
 
