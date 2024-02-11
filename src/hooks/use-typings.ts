@@ -53,7 +53,7 @@ export const useTypings = (enabled: boolean) => {
     return () => {
       window.removeEventListener('keydown', keydownHandler)
     }
-  }, [enabled, keydownHandler])
+  }, [keydownHandler])
 
   return {
     cursor,
