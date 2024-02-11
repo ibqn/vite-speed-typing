@@ -22,15 +22,16 @@ export const useCountdownTimer = (duration: number) => {
   }, [duration, setTimeLeft])
 
   useEffect(() => {
-    if (timeLeft === 0 && intervalRef.current) {
-      clearInterval(intervalRef.current)
+    if (timeLeft === 0) {
+      intervalRef.current && clearInterval(intervalRef.current)
       intervalRef.current = null
     }
-  }, [timeLeft, intervalRef])
+  }, [timeLeft])
 
   useEffect(() => {
     return () => {
       intervalRef.current && clearInterval(intervalRef.current)
+      intervalRef.current = null
     }
   }, [])
 
