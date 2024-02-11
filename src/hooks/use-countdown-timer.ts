@@ -5,6 +5,10 @@ export const useCountdownTimer = (duration: number) => {
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
 
   const startCountDown = useCallback(() => {
+    if (intervalRef.current) {
+      return
+    }
+
     intervalRef.current = setInterval(() => {
       setTimeLeft((prev) => prev - 1)
     }, 1000)
@@ -20,8 +24,15 @@ export const useCountdownTimer = (duration: number) => {
   useEffect(() => {
     if (timeLeft === 0 && intervalRef.current) {
       clearInterval(intervalRef.current)
+      intervalRef.current = null
     }
   }, [timeLeft, intervalRef])
+
+  useEffect(() => {
+    return () => {
+      intervalRef.current && clearInterval(intervalRef.current)
+    }
+  }, [])
 
   return { timeLeft, startCountDown, resetCountDown }
 }
