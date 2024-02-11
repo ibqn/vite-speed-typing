@@ -1,3 +1,4 @@
+import { log } from '@/util/log'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 const isKeyboardCodeAllowed = (code: string) => {
@@ -15,23 +16,35 @@ export const useTypings = (enabled: boolean) => {
   const [typed, setTyped] = useState('')
   const totalTyped = useRef(0)
 
-  const keydownHandler = useCallback(({ key, code }: KeyboardEvent) => {
-    if (!enabled || !isKeyboardCodeAllowed(code)) {
-      return
-    }
+  const keydownHandler = useCallback(
+    ({ key, code }: KeyboardEvent) => {
+      if (!enabled || !isKeyboardCodeAllowed(code)) {
+        return
+      }
 
-    if (code === 'Backspace') {
-      setTyped((prev: string) => prev.slice(0, -1))
-      totalTyped.current -= 1
-      return
-    }
+      log('key', key, 'code', code)
 
-    if (totalTyped.current >= cursor) {
-      return
-    }
+      if (code === 'Backspace') {
+        setTyped((prev: string) => prev.slice(0, -1))
+        setCursor(cursor - 1)
+        totalTyped.current -= 1
+        return
+      }
 
-    setTyped((prev: string) => prev + key)
-    totalTyped.current += 1
+      setTyped((prev: string) => prev.concat(key))
+      setCursor(cursor + 1)
+      totalTyped.current += 1
+    },
+    [cursor, enabled, setTyped]
+  )
+
+  const clearTyped = useCallback(() => {
+    setTyped('')
+    setCursor(0)
+  }, [setTyped, setCursor])
+
+  const resetTotalTyped = useCallback(() => {
+    totalTyped.current = 0
   }, [])
 
   useEffect(() => {
@@ -41,4 +54,12 @@ export const useTypings = (enabled: boolean) => {
       window.removeEventListener('keydown', keydownHandler)
     }
   }, [enabled, keydownHandler])
+
+  return {
+    cursor,
+    typed,
+    totalTyped: totalTyped.current,
+    clearTyped,
+    resetTotalTyped,
+  }
 }
