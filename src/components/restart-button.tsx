@@ -1,5 +1,5 @@
-import { ComponentProps, useRef } from 'react'
-import { RotateCw } from 'lucide-react'
+import { type ComponentProps, useRef } from 'react'
+import { RotateCwIcon } from 'lucide-react'
 import { cn } from '@/util/class-names'
 
 type Props = {
@@ -26,7 +26,7 @@ export const RestartButton = ({
       {...otherProps}
       className={cn('block rounded px-8 py-2 hover:bg-slate-700/50', className)}
     >
-      <RotateCw className="h-6 w-6" />
+      <RotateCwIcon className="size-6" />
     </button>
   )
 }
