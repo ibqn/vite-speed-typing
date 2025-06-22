@@ -1,6 +1,6 @@
 import { cn } from '@/util/class-names'
 import { ComponentProps, useMemo } from 'react'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import { formatPercentage } from '@/util/format-percentage'
 import { calculateAccuracyPercentage } from '@/util/calculate-accuracy-percentage'
 
