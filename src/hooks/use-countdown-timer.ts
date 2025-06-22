@@ -5,7 +5,9 @@ export const useCountdownTimer = (duration: number) => {
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
 
   const clear = () => {
-    intervalRef.current && clearInterval(intervalRef.current)
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current)
+    }
     intervalRef.current = null
   }
 
